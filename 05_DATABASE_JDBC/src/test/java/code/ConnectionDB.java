@@ -14,14 +14,6 @@ public class ConnectionDB {
 
         Connection connection = null;
 
-//        try {
-//            connection = DriverManager.getConnection(dbUrl,username,password);
-//            System.out.println("Connection created successfully");
-//        }
-//        // catch exception
-//        catch (SQLException throwables){
-//            System.out.println("Connection Failed! .....");
-//        }
 
         // 1.step create connection
         connection = DriverManager.getConnection(dbUrl,username,password);
