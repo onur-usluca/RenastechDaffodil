@@ -31,8 +31,8 @@ public class GETbooks {
     }
 
     @Test
-    (description = "Given a baseUrl When make GET call w /books and use query param limit=1 Then Verify status Code is 200")
-    void userRetrieveListOfTheBooks2(){
+    (description = "Given a baseUrl When make GET call w /books and use query param limit=2 Then Verify status Code is 200")
+    void userRetrieveListOfTheBooksLimit2(){
 
         // Given
         RequestSpecification requestBody = given().queryParam("limit", 2);
@@ -47,5 +47,40 @@ public class GETbooks {
 
         System.out.println(response.getBody().asString());
         System.out.println("BookId: "+bookId);
+    }
+
+    @Test
+    (description = "Given a baseUrl When make GET call w /books and use query param type=fiction Then Verify status Code is 200")
+    void userRetrieveListOfTheBooksTypeFiction(){
+
+        //Given
+        RequestSpecification requestBody = given().queryParam("type", "fiction");
+
+        //When
+        Response response = requestBody.when().get("/books");
+
+        //Then
+        response.then().assertThat().statusCode(200);
+
+        System.out.println(response.getBody().asString());
+        String type = response.jsonPath().getString("[0].type");
+
+        System.out.println(type);
+
+    }
+
+    @Test
+    (description = "Given a baseUrl When make GET call w /books and use query param type=crime(not exist) Then Verify status Code is 400")
+    void userRetrieveListOfTheBooksUnExistType(){
+
+        //Given
+        RequestSpecification requestBody = given().queryParam("type", "crime");
+
+        //When
+        Response response = requestBody.when().get("/books");
+
+        //Then
+        response.then().assertThat().statusCode(400);
+
     }
 }
