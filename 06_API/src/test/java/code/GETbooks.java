@@ -83,4 +83,19 @@ public class GETbooks {
         response.then().assertThat().statusCode(400);
 
     }
+
+    @Test
+    (description = "Given a baseUrl When make GET call w /books and use query param limit=221(out of limit) Then Verify status Code is 400")
+    void userRetrieveListOfTheBooksOutOfLimit(){
+
+        // Given
+        RequestSpecification requestBody = given().queryParam("limit", 221);
+
+        //When
+        Response response = requestBody.when().get("/books");
+
+        // Then
+        response.then().assertThat().statusCode(400);
+
+    }
 }
